@@ -1,0 +1,27 @@
+---
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install pip dependencies
+        run: pip install -r requirements.txt
+
+      # TODO: add tests and run them
+      - name: Run help
+        run: python3 artifactory-trash-restore.py --help
