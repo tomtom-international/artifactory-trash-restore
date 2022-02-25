@@ -1,0 +1,23 @@
+---
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run on push on main branch
+        run: |
+          echo "Hello artifactory-trash-restore on main!"
+      - name: Run on push on pull request
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "Hello artifactory-trash-restore in pull request!"
