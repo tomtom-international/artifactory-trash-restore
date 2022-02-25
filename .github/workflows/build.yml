@@ -14,10 +14,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Run on push on main branch
-        run: |
-          echo "Hello artifactory-trash-restore on main!"
-      - name: Run on push on pull request
-        if: github.event_name == 'pull_request'
-        run: |
-          echo "Hello artifactory-trash-restore in pull request!"
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install pip dependencies
+        run: pip install -r requirements.txt
+
+      # TODO: add tests and run them
+      - name: Run help
+        run: python3 artifactory-trash-restore.py --help
