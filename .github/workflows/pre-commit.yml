@@ -1,0 +1,16 @@
+name: pre-commit
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+    - uses: actions/setup-go@v2 # gitleaks requires minimum 1.16: https://github.com/zricethezav/gitleaks/pull/652
+      with:
+        go-version: '^1.17.3'
+    - uses: pre-commit/action@9b88afc9cd57fd75b655d5c71bd38146d07135fe # v2.0.3
